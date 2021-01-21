@@ -37,14 +37,14 @@ app.get('/cats/json', (req, res) => {
 
 app.get('/cats/:catId?', (req, res) => {
     console.log(req.params);
-    // if (req.params.catId === 'Parsy') {
-    //     res.status(200).send(`<h1>My name is ${req.params.catId}, m-q-u-u-u:)))</h1>`);
-    // }
+    if (req.params.catId === 'Parsy') {
+        res.status(200).send(`<h1>My name is ${req.params.catId}, m-q-u-u-u:)))</h1>`);
+    }
 
-    // else {
+    else {
     res.status(404).send(`<h1>Sorry, but you are not  a Parsy. Get out?!?!?</h1>`);
-    // return;
-    // }
+    return;
+    }
 });
 
 app.post('/cats', (req, res) => {
