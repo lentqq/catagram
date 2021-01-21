@@ -8,7 +8,7 @@ function middleware(req, res, next) {
         return;
     }
 
-    res.status(403).send('You need to specify catId');
+    res.status(403).send('<h2>You need to specify catId</h2>');
 }
 
 module.exports = middleware;

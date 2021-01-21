@@ -4,8 +4,8 @@ const checkCatIdMiddleware = require('./middlewares/middleware');
 const loggerMiddleware = require('./middlewares/loggerMiddleware')
 const app = express();
 const PORT = 5000;
-// app.use(checkCatIdMiddleware);
-app.use(loggerMiddleware);
+// app.use(loggerMiddleware);
+app.use(checkCatIdMiddleware);
 
 app.get('/', (req, res) => {
     res.status(200).send('<h1>Hello from express server:)))</h1>');
@@ -16,14 +16,13 @@ app.get('/download', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
 });
 
-
 app.get('/converter', (req, res) => {
     res.status(200).send('<h1>Welcome to converter page</h1>');
 });
 
-app.get('/cats', (req, res) => {
-    res.send('<h1>Some cute cats:)))</h1>')
-});
+// app.get('/cats', (req, res) => {
+//     res.send('<h1>Some cute cats:)))</h1>')
+// });
 
 app.get('/cats/json', (req, res) => {
     // res.json([
@@ -37,14 +36,14 @@ app.get('/cats/json', (req, res) => {
 
 app.get('/cats/:catId?', (req, res) => {
     console.log(req.params);
-    if (req.params.catId === 'Parsy') {
-        res.status(200).send(`<h1>My name is ${req.params.catId}, m-q-u-u-u:)))</h1>`);
-    }
+    // if (req.params.catId === 'Parsy') {
+    //     res.status(200).send(`<h1>My name is ${req.params.catId}, m-q-u-u-u:)))</h1>`);
+    // }
 
-    else {
+    // else {
     res.status(404).send(`<h1>Sorry, but you are not  a Parsy. Get out?!?!?</h1>`);
-    return;
-    }
+    // return;
+    // }
 });
 
 app.post('/cats', (req, res) => {
