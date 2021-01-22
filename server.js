@@ -25,9 +25,10 @@ app.get('/converter', (req, res) => {
     res.status(200).send('<h1>Welcome to converter page</h1>');
 });
 
-// app.get('/cats', (req, res) => {
-//     res.send('<h1>Some cute cats:)))</h1>')
-// });
+app.get('/cats', (req, res) => {
+   res.render('cats');
+    // res.send('<h1>Some cute cats:)))</h1>')
+});
 
 app.get('/cats/json', (req, res) => {
     // res.json([
