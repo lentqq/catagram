@@ -1,12 +1,17 @@
 const express = require('express');
 const middleware = require('./middlewares/middleware');
 const checkCatIdMiddleware = require('./middlewares/middleware');
-const loggerMiddleware = require('./middlewares/loggerMiddleware')
+const loggerMiddleware = require('./middlewares/loggerMiddleware');
+const cats = require('./cats');
+const hbs = require('express-handlebars');
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = 5000;
 // app.use(loggerMiddleware);
 // app.use(checkCatIdMiddleware);
-const hbs = require('express-handlebars');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.engine('hbs', hbs({
     extname: 'hbs',
 }));
@@ -14,7 +19,7 @@ app.set('view engine', 'hbs')
 
 app.get('/', (req, res) => {
     let name = 'Parsy';
-    res.render('home', {name});
+    res.render('home', { name });
     // res.status(200).send('<h1>Hello from express server:)))</h1>');
 });
 
@@ -28,7 +33,7 @@ app.get('/converter', (req, res) => {
 });
 
 app.get('/cats', (req, res) => {
-   res.render('cats');
+    res.render('cats', { cats: cats.getAll() });
     // res.send('<h1>Some cute cats:)))</h1>')
 });
 
@@ -56,10 +61,13 @@ app.get('/cats/:catId?', (req, res) => {
 
 app.post('/cats', (req, res) => {
     console.log(req.body);
-    console.log('create cat');
-    res.status(201);
-    res.send('<h1>Cat created!</h1>')
-    res.end();
+    let catName = req.body.cat;
+    cats.add(catName);
+    res.redirect('/cats');
+    // console.log('create cat');
+    // res.status(201);
+    // res.send('<h1>Cat created!</h1>')
+    // res.end();
 });
 
 app.all('/', (req, res) => {
