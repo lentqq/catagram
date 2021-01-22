@@ -5,10 +5,15 @@ const loggerMiddleware = require('./middlewares/loggerMiddleware')
 const app = express();
 const PORT = 5000;
 // app.use(loggerMiddleware);
-app.use(checkCatIdMiddleware);
+// app.use(checkCatIdMiddleware);
+const hbs = require('express-handlebars');
+app.engine('hbs', hbs());
+app.set('view engine', 'hbs')
 
 app.get('/', (req, res) => {
-    res.status(200).send('<h1>Hello from express server:)))</h1>');
+    let name = 'Parsy';
+    res.render('home', {name});
+    // res.status(200).send('<h1>Hello from express server:)))</h1>');
 });
 
 app.get('/download', (req, res) => {
