@@ -7,7 +7,9 @@ const PORT = 5000;
 // app.use(loggerMiddleware);
 // app.use(checkCatIdMiddleware);
 const hbs = require('express-handlebars');
-app.engine('hbs', hbs());
+app.engine('hbs', hbs({
+    extname: 'hbs',
+}));
 app.set('view engine', 'hbs')
 
 app.get('/', (req, res) => {
@@ -53,6 +55,7 @@ app.get('/cats/:catId?', (req, res) => {
 });
 
 app.post('/cats', (req, res) => {
+    console.log(req.body);
     console.log('create cat');
     res.status(201);
     res.send('<h1>Cat created!</h1>')
